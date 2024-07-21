@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Day_9) - DOM Manipulation</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            border: 5px solid blue;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: white;
+            border-radius: 50px;
+            background-color: rgb(255, 137, 137);
+            /* margin: 10px; */
+            outline: none;
+            border: none;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis iste laudantium aperiam ratione fuga sunt
+            sapiente ducimus tempora alias accusantium libero reprehenderit voluptate dolores debitis, deleniti
+            necessitatibus nam, soluta in, provident aliquid ut. Velit veniam tempora ipsum qui. Corrupti incidunt sed
+            molestias optio consequatur rem ducimus cum facilis tenetur porro laudantium corporis dolor fuga,
+            perspiciatis aut, laborum ea consectetur ab. Voluptas dolore, facere at eos ab quia in illum voluptate
+            aliquam vitae rerum ut id. Voluptatibus incidunt, ratione nostrum maiores excepturi reprehenderit
+            voluptatum? Explicabo sequi corrupti itaque hic mollitia, odio placeat expedita eum dolore asperiores
+            aspernatur alias, ducimus nobis rem.</p>
+        <button>Change Color</button>
+        <div id="string">Who is me?</div>
+        <div class="box"></div>
+        <ul>
+            <li class="listItem">Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+        <img height="200px" width="200px" src="https://cdn.pixabay.com/photo/2024/07/16/05/31/apple-8898321_1280.jpg"
+            alt="">
+    </div>
+
+    <script>
+        // Day 9: DOM Manipulation
+        console.log("/-----------------------------/");
+        // Tasks/Activities:
+
+        // Activity 1: Selecting and Manipulating Elements
+        // . Task 1: Select an HTML element by its ID and change its text content.
+        const string = document.getElementById('string');
+        string.textContent = 'I am box.';
+
+        // . Task 2: Select an HTML element by its class and change its background color.
+        const box = Array.from(document.getElementsByClassName('box'));
+        box.forEach((e) => { e.style.backgroundColor = 'maroon' });
+
+        // Activity 2: Creating and Appending Elements
+        // . Task 3: Create a new div element with some text content and append it to the body.
+        const div = document.createElement('div');
+        div.textContent = 'I am created using JavaScript!'
+        document.querySelector('body').appendChild(div)
+
+        // . Task 4: Create a new li element and add it to an existing ul list.
+        const li = document.createElement("li")
+        li.textContent = 'I am first list item added using JavaScript';
+        const ul = document.querySelector('ul')
+        ul.appendChild(li)
+
+        // Activity 3: Removing Elements
+        // . Task 5: Select an HTML element and remove it from the DOM.
+        document.querySelector('.container').removeChild(string);
+
+        // . Task 6: Remove the last child of a specific HTML element.
+        ul.removeChild(ul.lastElementChild);
+
+        // Activity 4: Modifying Attributes and Classes
+        // . Task 7: Select an HTML element and change one of its attributes (e.g., src of an img tag).
+        const img = document.querySelector('img');
+        img.src = 'https://cdn.pixabay.com/photo/2024/07/16/12/38/strawberry-8899244_1280.jpg'
+
+        // . Task 8: Add and remove a CSS class to/from an HTML element.
+        ul.classList.add('list')
+        document.querySelector('li').classList.remove('listItem')
+
+        // Activity 5: Event Handling
+        // . Task 9: Add a click event listener to a button that changes the text content of a paragraph.
+        const button = document.querySelector('button')
+        const para = document.querySelector('p')
+        button.addEventListener('click', () => para.style.color = 'red')
+
+        // . Task 10: Add a mouseover event listener to an element that changes its border color.
+        box.forEach(e => e.addEventListener('mouseover', (elem) => elem.target.style.borderColor = "red"))
+
+        // Feature Request:
+        // 1. Text Content Manipulation Script: Write a script that selects an HTML element by its ID and changes its text content.
+        // const string = document.getElementById('string');
+        // string.textContent = 'I am box.';
+
+        // 2. Element Creation Script: Create a script that demonstrates creating a new div element and appending it to the body.
+        // const div = document.createElement('div');
+        // div.textContent = 'I am created using JavaScript!'
+        // document.querySelector('body').appendChild(div)
+
+        // 3. Element Removal Script: Write a script that selects an HTML element and removes it from the DOM.
+        // document.querySelector('.container').removeChild(string);
+
+        // 4. Attribute Modification Script: Create a script that changes the attributes of an HTML element.
+        // const img = document.querySelector('img');
+        // img.src = 'https://cdn.pixabay.com/photo/2024/07/16/12/38/strawberry-8899244_1280.jpg'
+
+        // 5. Event Handling Script: Write a script that adds event listeners to HTML elements to change their content or style based on user interactions.
+        // const button = document.querySelector('button')
+        // const para = document.querySelector('p')
+        // button.addEventListener('click', () => para.style.color = 'red')
+
+        // Achievement:
+        // By the end of these activities, students will:
+
+        // . Select and manipulate DOM elements using JavaScript.
+        // . Create and append new elements to the DOM.
+        // . Remove elements from the DOM.
+        // · Modify attributes and classes of HTML elements.
+        // · Add and handle events to make web pages interactive.
+        console.log("/-----------------------------/");
+    </script>
+</body>
+
+</html>
