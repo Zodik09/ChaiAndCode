@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Day_10) Event Handling</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            color: white;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0);
+            padding: 10px;
+        }
+
+        p {
+            font-size: 2rem;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 1rem;
+            color: black;
+            background-color: aqua;
+            outline: none;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        form {
+            margin: 10px;
+        }
+
+        input {
+            padding: 10px 20px;
+            border-radius: 50px;
+            outline: none;
+            border: none;
+            color: black;
+        }
+
+        select,
+        option {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Click the below button to change me.</p>
+    <button>Change it 👆</button>
+    <img height="200px" width="200px" src="https://cdn.pixabay.com/photo/2024/07/16/12/38/strawberry-8899244_1280.jpg"
+        alt="">
+    <div class="box"></div>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <span>I am in <span id="place"></span></span>
+    <select name="options" id="sel">
+        <option value="Delhi">Delhi</option>
+        <option value="Bahraich">Bahraich</option>
+        <option value="Guriyamau">Gauriyamau</option>
+        <option value="Moradabad">Moradabad</option>
+    </select>
+    <ol id="lists">
+        <li id="list1">List item 1</li>
+        <li id="list2">List item 2</li>
+        <li id="list3">List item 3</li>
+        <li id="list4">List item 4</li>
+        <li id="list5">List item 5</li>
+    </ol>
+    <div id="parent">
+        <!-- Existing child elements -->
+    </div>
+    <button id="addButton">Add Button</button>
+    <script>
+        // Day 10: Event Handling
+        console.log("/-----------------------------/");
+        // Tasks/Activities:
+        // Activity 1: Basic Event Handling
+        // . Task 1: Add a click event listener to a button that changes the text content of a paragraph.
+        const button = document.querySelector('button')
+        const para = document.querySelector('p')
+        button.addEventListener('click', e => para.textContent = 'I have been changed by clicking on the below button.')
+
+        // · Task 2: Add a double-click event listener to an image that toggles its visibility.
+        const img = document.querySelector('img')
+        img.addEventListener('dblclick', e => img.style.visibility = 'hidden')
+
+        // Activity 2: Mouse Events
+        // . Task 3: Add a mouseover event listener to an element that changes its background color.
+        const box = document.querySelector('.box')
+        box.addEventListener('mouseover', e => e.target.style.backgroundColor = "pink")
+
+        // . Task 4: Add a mouseout event listener to an element that resets its background color.
+        box.addEventListener('mouseout', e => e.target.style.backgroundColor = "red")
+
+        // Activity 3: Keyboard Events
+        // . Task 5: Add a keydown event listener to an input field that logs the key pressed to the console.
+        const input = document.querySelector('input')
+        input.addEventListener('keydown', e => console.log(e.key))
+
+        // . Task 6: Add a keyup event listener to an input field that displays the current value in a paragraph.
+        input.addEventListener('keyup', e => para.textContent += e.key)
+
+        // Activity 4: Form Events
+        // . Task 7: Add a submit event listener to a form that prevents the default submission and logs the form data to the console.
+        const form = document.getElementById('myForm');
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+                formDataObject[key] = value;
+            });
+            console.log('Form Data:', formDataObject);
+        });
+
+        // . Task 8: Add a change event listener to a select dropdown that displays the selected value in a paragraph.
+        const select = document.getElementById('sel')
+        const place = document.getElementById('place')
+        select.addEventListener('change', e => place.textContent = e.target.value)
+
+
+        // Activity 5: Event Delegation
+        // . Task 9: Add a click event listener to a list that logs the text content of the clicked list item using event delegation.
+        const lists = document.querySelector('#lists')
+        const list1 = document.getElementById('list1')
+        const list2 = document.getElementById('list2')
+        const list3 = document.getElementById('list3')
+        const list4 = document.getElementById('list4')
+        const list5 = document.getElementById('list5')
+        lists.addEventListener('click', e => {
+            if (e.target.id === 'list1') {
+                console.log(list1.textContent
+                );
+            }
+            else if (e.target.id === 'list2') {
+                console.log(list2.textContent
+                );
+            }
+            else if (e.target.id === 'list3') {
+                console.log(list3.textContent
+                );
+            }
+            else if (e.target.id === 'list4') {
+                console.log(list4.textContent
+                );
+            }
+            else {
+                console.log(list5.textContent
+                );
+            }
+        })
+
+        // . Task 10: Add an event listener to a parent element that listens for events from dynamically added child elements.
+        const parent = document.getElementById('parent');
+        const addButton = document.getElementById('addButton');
+        function handleButtonClick(event) {
+            if (event.target.tagName === 'BUTTON') {
+                console.log('Button clicked:', event.target.textContent);
+            }
+        }
+        parent.addEventListener('click', handleButtonClick);
+        function addNewButton() {
+            const newButton = document.createElement('button');
+            newButton.textContent = 'New Button ' + (parent.children.length + 1);
+            parent.appendChild(newButton);
+        }
+        addButton.addEventListener('click', addNewButton);
+
+        // Feature Request:
+        // 1. Click Event Script: Write a script that adds a click event listener to a button to change the text content of a paragraph.
+        // const button = document.querySelector('button')
+        // const para = document.querySelector('p')
+        // button.addEventListener('click', e => para.textContent = 'I have been changed by clicking on the below button.')
+
+        // 2. Mouse Events Script: Create a script that handles mouseover and mouseout events to change the background color of an element.
+        // const box = document.querySelector('.box')
+        // box.addEventListener('mouseover', e => e.target.style.backgroundColor = "pink")
+        // box.addEventListener('mouseout', e => e.target.style.backgroundColor = "red")
+
+        // 3. Keyboard Events Script: Write a script that logs key presses and displays input field values using keydown and keyup event listeners.
+        // const input = document.querySelector('input')
+        // input.addEventListener('keydown', e => console.log(e.key))
+        // input.addEventListener('keyup', e => para.textContent += e.key)
+
+        // 4. Form Events Script: Create a script that handles form submission and change events on a select dropdown.
+        // const select = document.getElementById('sel')
+        // const place = document.getElementById('place')
+        // select.addEventListener('change', e => place.textContent = e.target.value)
+
+        // 5. Event Delegation Script: Write a script that demonstrates event delegation by handling events on dynamically added child elements.
+        // const addButton = document.getElementById('addButton');
+        // function handleButtonClick(event) {
+        //     if (event.target.tagName === 'BUTTON') {
+        //         console.log('Button clicked:', event.target.textContent);
+        //     }
+        // }
+        // parent.addEventListener('click', handleButtonClick);
+        // function addNewButton() {
+        //     const newButton = document.createElement('button');
+        //     newButton.textContent = 'New Button ' + (parent.children.length + 1);
+        //     parent.appendChild(newButton);
+        // }
+        // addButton.addEventListener('click', addNewButton);
+
+        // Achievement:
+        // By the end of these activities, students will:
+        // · Add and handle basic events like click, double-click, mouseover, mouseout, keydown, and keyup.
+        // Understand and handle form events.
+        // . Implement event delegation to manage events on dynamically added elements.
+        // . Make web pages interactive by responding to various user actions.
+        console.log("/-----------------------------/");
+    </script>
+</body>
+
+</html>
